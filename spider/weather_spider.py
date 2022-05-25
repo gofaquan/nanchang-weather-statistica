@@ -64,7 +64,7 @@ class WeatherSpider:
         self.analyzeData(self.sendReq())
 
         # 时间逻辑判断
-        if (self.month + 1) == 12:
+        if self.month == 12:
             # 爬取下一年
             self.month = 1
             self.year += 1
