@@ -102,15 +102,14 @@ class WeatherSpider:
         for i in range(DAY):  # 在当月天数的大小中依次添加
 
             self.fill_day_data(obj, self.day_condition_dict, i)  # day_condition_dict 载入数据
-            self.month_dict[get_weather_data(obj, D, i * 6)] = self.day_condition_dict  # month_dict 载入数据
+            self.month_dict[i + 1] = self.day_condition_dict  # month_dict 载入数据
 
             # 这里重新置为空! 如果不置为空则导致 数据都是当月最后一个数据
             self.day_condition_dict = {}
 
-
-
     # 将数据填入每月的 dict
     def fill_weather_data(self, obj, weather_dict):
+        weather_dict['日期'] = str(self.year) + '年' + str(self.month) + '月'
         weather_dict['平均高温'] = get_weather_data(obj, M, 0)
         weather_dict['平均低温'] = get_weather_data(obj, M, 1)
         weather_dict['极端高温'] = get_weather_data(obj, M, 2)
@@ -121,18 +120,19 @@ class WeatherSpider:
 
     # 将数据填入每日的 dict
     def fill_day_data(self, obj, weather_dict, index):
+        weather_dict['日期'] = get_weather_data(obj, D, index * self.QUOTA_NUM)
         weather_dict['最高温'] = get_weather_data(obj, D, index * self.QUOTA_NUM + 1)
         weather_dict['最低温'] = get_weather_data(obj, D, index * self.QUOTA_NUM + 2)
         weather_dict['天气'] = get_weather_data(obj, D, index * self.QUOTA_NUM + 3)
         weather_dict['风力风向'] = get_weather_data(obj, D, index * self.QUOTA_NUM + 4)
         weather_dict['空气质量指数'] = get_weather_data(obj, D, index * self.QUOTA_NUM + 5)
 
+
 # a = WeatherSpider()
 # # data = a.sendReq()
 # # a.analyzeData(data)
 # print(a.weather_condition_dict)
 # print(a.month_dict)
-# # print(weather_condition_dict)
-# # print("====================================")
-# # print(month_dict)
-
+# # # print(weather_condition_dict)
+# # # print("====================================")
+# # # print(month_dict)
