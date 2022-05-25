@@ -58,8 +58,22 @@ class WeatherSpider:
             'X-Requested-With': 'XMLHttpRequest',
         }
 
+    # 获取数据
+    def getData(self):
         # 直接调用函数，数据载入两个 dict，之后可直接读取
         self.analyzeData(self.sendReq())
+
+        # 时间逻辑判断
+        if (self.month + 1) == 12:
+            # 爬取下一年
+            self.month = 1
+            self.year += 1
+        else:
+            # 爬取下一月
+            self.month += 1
+
+        # 返回本次的数据
+        return self.weather_condition_dict, self.month_dict
 
     # 发送 GET 请求 获取 html
     def sendReq(self):
@@ -126,7 +140,6 @@ class WeatherSpider:
         weather_dict['天气'] = get_weather_data(obj, D, index * self.QUOTA_NUM + 3)
         weather_dict['风力风向'] = get_weather_data(obj, D, index * self.QUOTA_NUM + 4)
         weather_dict['空气质量指数'] = get_weather_data(obj, D, index * self.QUOTA_NUM + 5)
-
 
 # a = WeatherSpider()
 # # data = a.sendReq()

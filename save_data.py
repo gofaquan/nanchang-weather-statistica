@@ -1,5 +1,4 @@
 import pymysql
-from weather_spider import WeatherSpider
 
 # 配置 mysql
 db_config = {
@@ -37,13 +36,13 @@ def connectDB():
 
 
 # 插入数据库
-def insertData(cu, weatherSpider):
+def insertData(cu, weather_condition_dict,month_dict):
     # weatherSpider __init__  读取 dict 数据
     # 插入进 每月数据 表中
-    insert_into_table_with_params(cu, '每月数据', weatherSpider.weather_condition_dict)
+    insert_into_table_with_params(cu, '每月数据',weather_condition_dict)
 
     # 迭代插入进 每日数据 表中
-    for _, month_dict in weatherSpider.month_dict.items():
+    for _, month_dict in month_dict.items():
         insert_into_table_with_params(cu, '每日数据', month_dict)
 
 
