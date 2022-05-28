@@ -1,5 +1,6 @@
 import pymysql
-from db.insert import insertData
+from db.insert_data import insertData
+from db.read_data import read_month_data
 from spider.range import rangeTime
 
 # 配置 mysql
@@ -55,3 +56,15 @@ def insert(startYear, startMonth, endYear, endMonth):
 
     # commit 数据请求
     commit(conn)
+
+
+def read_month():
+    # 获取 conn ,cu
+    conn, cu = connectDB()
+
+    result = read_month_data(cu)
+
+    # commit 数据请求
+    commit(conn)
+
+    return result
