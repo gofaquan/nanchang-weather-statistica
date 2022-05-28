@@ -6,7 +6,7 @@ def insert_into_table_with_params(cu, table, params):
     keys = params.keys()
     values = params.values()
     sql = 'insert into {} ({}) values ("{}");'.format(table, ','.join(keys), '","'.join(values))
-    print(sql)
+    # print(sql)
     cu.execute(sql)
 
 
