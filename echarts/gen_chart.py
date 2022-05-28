@@ -6,6 +6,8 @@ import random
 import datetime
 from pyecharts.charts import Calendar
 
+from pyecharts.charts import Pie
+
 
 def create_chart(x, y1, y2, y3, y4):
     bar = (
@@ -51,4 +53,14 @@ def calendar_day(data):
             ),
         )
             .render("每日数据最高温.html")
+    )
+
+
+def pie_wind(data):
+    (
+        Pie()
+            .add("", data)
+            # .set_global_opts(title_opts=opts.TitleOpts(pos_top="50", pos_left="center", title="风力风向饼状图"))
+            .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
+            .render("风力风向.html")
     )

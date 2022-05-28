@@ -32,3 +32,11 @@ def read_day_data_2021(cu):
     cu.execute(sql)
     result = cu.fetchall()
     return result
+
+
+def read_day_wind_2021(cu):
+    sql = "select 风力风向,count(*) from 每日数据 where 日期 like  '2021%' group by 风力风向;"
+
+    cu.execute(sql)
+    result = cu.fetchall()
+    return result
