@@ -1,4 +1,4 @@
-from spider.weather_spider import WeatherSpider
+from spider.day_month_condition import WeatherSpider
 
 
 # 选择爬取的范围
