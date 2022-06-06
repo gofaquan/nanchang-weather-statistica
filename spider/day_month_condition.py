@@ -141,6 +141,17 @@ class WeatherSpider:
         weather_dict['风力风向'] = get_weather_data(obj, D, index * self.QUOTA_NUM + 4)
         weather_dict['空气质量指数'] = get_weather_data(obj, D, index * self.QUOTA_NUM + 5)
 
+
+
+
+
+
+
+
+
+
+
+# --------------------------------------------------------------------------------------------
 # a = WeatherSpider()
 # # data = a.sendReq()
 # # a.analyzeData(data)
