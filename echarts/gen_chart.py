@@ -60,7 +60,7 @@ def pie_wind(data):
     (
         Pie()
             .add("", data)
-            # .set_global_opts(title_opts=opts.TitleOpts(pos_top="50", pos_left="center", title="风力风向饼状图"))
+            .set_global_opts(title_opts=opts.TitleOpts(pos_top="50", pos_left="center", title="风力风向饼状图"))
             .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
             .render("风力风向.html")
     )

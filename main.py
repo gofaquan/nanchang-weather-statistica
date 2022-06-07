@@ -13,5 +13,5 @@ if __name__ == "__main__":
     # print(spilt_flag(day_t))
     # calendar_day(spilt_flag(day_t))
 
-    # _, wind_data = read_day()
-    # pie_wind(wind_data)
+    _, wind_data = read_day()
+    pie_wind(wind_data)
