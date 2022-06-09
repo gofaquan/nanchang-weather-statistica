@@ -1,0 +1,525 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <script src="static/assets/js/echarts.min.js"></script>
+    <title>南昌天气网站/五月天气</title>
+    <meta content="" name="descriptison">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="static/assets/img/网站图标.jpg" rel="icon">
+    <link href="static/assets/img/网站图片1.jpg" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i,900"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/venobox/venobox.css" rel="stylesheet">
+    <link href="static/assets/vendor/aos/aos.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="static/assets/css/style.css" rel="stylesheet">
+
+</head>
+<style type="text/css">
+    .ttpp {
+        font-size: 80px;
+    }
+
+    .ttpp1 {
+        font-size: 40px;
+    }
+
+    .ttpp2 {
+        font-size: 30px;
+        color: {{ datalist[0][4] }};
+    }
+
+    #table01 {
+        width: 650px;
+        height: 300px;
+        color: white;
+        border-color: #00a6ff;
+        background-color: #507387;
+        opacity: 40%;
+    }
+
+    #p1 {
+        width: 100px;
+        position: center;
+        font-size: 30px;
+        color: black;
+    }
+
+    #p2 {
+        position: center;
+        font-size: 30px;
+        color: black;
+    }
+
+    .wj {
+        font-size: 30px;
+        color: #117a8b;
+    }
+
+    .about-lists a:hover, .about-lists a:active {
+        color: #2fff8d;
+    }
+    .text-light span{
+        color: #117a8b;
+    }
+</style>
+<body>
+
+<!-- ======= Top Bar ======= -->
+{#<section id="topbar" class="d-none d-lg-block">#}
+{#    <div class="container clearfix">#}
+{#        <div class="contact-info float-left">#}
+{#            <i class="icofont-envelope"></i><a href="mailto:contact@example.com">contact@example.com</a>#}
+{#            <i class="icofont-phone"></i> +1 5589 55488 55#}
+{#        </div>#}
+{#        <div class="social-links float-right">#}
+{#            <a href="#" class="twitter"><i class="icofont-twitter"></i></a>#}
+{#            <a href="#" class="facebook"><i class="icofont-facebook"></i></a>#}
+{#            <a href="#" class="instagram"><i class="icofont-instagram"></i></a>#}
+{#            <a href="#" class="skype"><i class="icofont-skype"></i></a>#}
+{#            <a href="#" class="linkedin"><i class="icofont-linkedin"></i></i></a>#}
+{#        </div>#}
+{#    </div>#}
+{#</section>#}
+
+<!-- ======= Header ======= -->
+<header id="header">
+    <div class="container">
+
+        <div class="logo float-left">
+            <h1 class="text-light"><span>今日天气</span></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html"><img src="static/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+        </div>
+
+        <nav class="nav-menu float-right d-none d-lg-block">
+            <ul>
+                <li class="active"><a href="/index">首页 <i class="la la-angle-down"></i></a></li>
+                <li><a href="/May" target="_blank">五月天气</a></li>
+                <li><a href="/air" target="_blank">空气质量</a></li>
+                <li><a href="/Team" target="_blank">团队</a></li>
+
+
+            </ul>
+        </nav><!-- .nav-menu -->
+
+    </div>
+</header><!-- End Header -->
+
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+    <div class="hero-container">
+        <div id="heroCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+
+            <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+            <div class="carousel-inner" role="listbox">
+
+                <!-- Slide 1 -->
+                <div class="carousel-item active" style="background-image: url('static/assets/img/slide/天气背景图片.jpg');">
+                    <div class="carousel-container">
+                        <div class="carousel-content container">
+                            <h2 class="animated fadeInDown">南昌 <span>天气</span></h2>
+                            <p class="animated fadeInUp">{{ datalist[0][0] }}</p>
+                            <p class="ttpp">{{ datalist[0][9] }}&nbsp&nbsp&nbsp<b
+                                    class="ttpp1"><br>{{ datalist[0][10] }}<br>{{ datalist[0][11] }}</b></p>
+                            <p>{{ datalist[0][1] }}&nbsp&nbsp&nbsp{{ datalist[0][2] }}&nbsp&nbsp&nbsp{{ datalist[0][3] }}</p>
+                            <table class="ttpp2">
+                                <tr>
+                                    <td>{{ datalist[0][5] }}&nbsp&nbsp&nbsp&nbsp{{ datalist[0][6] }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="main1" style="width: 2000px;height:400px;"></div>
+                    </div>
+
+                </div>
+                <script type="text/javascript">
+                    // 基于准备好的dom，初始化echarts实例
+                    var myChart = echarts.init(document.getElementById('main1'));
+                    {#var option = {#}
+                    {#        legend: {data: ['气温', '天气']},#}
+                    {#        grid: {#}
+                    {#            left: '3%',#}
+                    {#            right: '0%',#}
+                    {#            bottom: '6%'#}
+                    {#        },#}
+                    {#        title: {#}
+                    {#            left: 'center',#}
+                    {#            text: '南昌12小时气温',#}
+                    {#            top: '8%'#}
+                    {#        },#}
+                    {#        xAxis: {#}
+                    {#            type: 'category',#}
+                    {#            data: {{ datalist2|tojson }}#}
+                    {#        },#}
+                    {##}
+                    {#        yAxis: {#}
+                    {#type: 'value'#}
+                    {#        },#}
+                    {#        series: [#}
+                    {#            {#}
+                    {#                data: {{ datalist1|tojson }},#}
+                    {#                type: 'line'#}
+                    {#            },#}
+                    {#            {#}
+                    {#                name: '天气',#}
+                    {#                color: 'white',#}
+                    {#                type: 'line',#}
+                    {#                stack: 'Total',#}
+                    {#                label: {#}
+                    {#                    show: true,#}
+                    {#                    position: 'top',#}
+                    {#                },#}
+                    {#                emphasis: {#}
+                    {#                    focus: 'series'#}
+                    {#                },#}
+                    {#            },#}
+                    {#            {#}
+                    {#                name: '气温',#}
+                    {#                color: 'white',#}
+                    {#                type: 'line',#}
+                    {#                stack: 'Total',#}
+                    {#                label: {#}
+                    {#                    show: true,#}
+                    {#                    position: 'top',#}
+                    {#                },#}
+                    {#                emphasis: {#}
+                    {#                    focus: 'series'#}
+                    {#                },#}
+                    {#                data: {{ datalist1|tojson }}#}
+                    {#            },#}
+                    {##}
+                    {#        ]#}
+                    {#    }#}
+                    {#;#}
+                    var option = {
+                        title: {
+                            left: 'center',
+                            text: '南昌12小时气温',
+                            top: '8%'
+                        },
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: {
+                                type: 'shadow'
+                            }
+                        },
+                        grid: {
+                            left: '3%',
+                            right: '4%',
+                            bottom: '3%',
+                            containLabel: true
+                        },
+                        xAxis: [
+                            {
+                                type: 'category',
+                                data: {{ datalist2|tojson }},
+                                axisTick: {
+                                    alignWithLabel: true
+                                }
+                            }
+                        ],
+                        yAxis: [
+                            {
+                                type: 'value'
+                            }
+                        ],
+                        series: [
+                            {
+                                name: 'Direct',
+                                type: 'bar',
+                                barWidth: '50%',
+                                data: {{ datalist1|tojson }}
+                            }
+                        ]
+                    };
+                    // 使用刚指定的配置项和数据显示图表。
+                    myChart.setOption(option);
+                </script>
+                <!-- Slide 2 -->
+                <div class="carousel-item" style="background-image: url('static/assets/img/slide/天气背景图片02.jpg');">
+                    <div class="carousel-container">
+                        <div class="carousel-content container">
+                            <h2 class="animated fadeInDown">南昌天气</h2>
+                            <p class="animated fadeInUp">{{ datalist[0][0] }}</p>
+                            <p class="ttpp">{{ datalist[0][9] }}&nbsp&nbsp&nbsp<b
+                                    class="ttpp1"><br>{{ datalist[0][10] }}<br>{{ datalist[0][11] }}</b></p>
+                            <p>{{ datalist[0][1] }}&nbsp&nbsp&nbsp{{ datalist[0][2] }}&nbsp&nbsp&nbsp{{ datalist[0][3] }}</p>
+                            <table class="ttpp2">
+                                <tr>
+                                    <td>{{ datalist[0][5] }}&nbsp&nbsp&nbsp&nbsp{{ datalist[0][6] }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="main2" style="width: 700px;height:400px;"></div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    // 基于准备好的dom，初始化echarts实例
+                    var myChart = echarts.init(document.getElementById('main2'));
+                    var option = {
+                        title: {
+                            left: 'center',
+                            text: '南昌12小时气温',
+                            top: '8%'
+                        },
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: {
+                                type: 'shadow'
+                            }
+                        },
+                        grid: {
+                            left: '3%',
+                            right: '4%',
+                            bottom: '3%',
+                            containLabel: true
+                        },
+                        xAxis: [
+                            {
+                                type: 'category',
+                                data: {{ datalist5|tojson }},
+                                axisTick: {
+                                    alignWithLabel: true
+                                }
+                            }
+                        ],
+                        yAxis: [
+                            {
+                                type: 'value'
+                            }
+                        ],
+                        series: [
+                            {
+                                name: 'Direct',
+                                type: 'bar',
+                                barWidth: '50%',
+                                data: {{ datalist4|tojson }}
+                            }
+                        ]
+                    };
+                    // 使用刚指定的配置项和数据显示图表。
+                    myChart.setOption(option);
+                </script>
+                <!-- Slide 3 -->
+                {#                <table class="table table-striped">#}
+                {#            <tr>#}
+                {#                <td>影号</td>#}
+                {#                <td>电影中文名称</td>#}
+                {#                <td>电影外国名称</td>#}
+                {#                <td>评分</td>#}
+                {#                <td>评价人次</td>#}
+                {#                <td>一句话</td>#}
+                {#                <td>其他信息</td>#}
+                {##}
+                {#            </tr>#}
+                {#            {% for movie in movies %}#}
+                {#            <tr>#}
+                {#                <td>{{ movie[0]}}</td>#}
+                {#                <td><a href="{{movie[1]}}">{{movie[3]}}</a></td>#}
+                {#                <td>{{ movie[4]}}</td>#}
+                {#                <td>{{ movie[5]}}</td>#}
+                {#                <td>{{ movie[6]}}</td>#}
+                {#                <td>{{ movie[7]}}</td>#}
+                {#                <td>{{ movie[8]}}</td>#}
+                {##}
+                {#            </tr>#}
+                {#            {% endfor %}#}
+                {##}
+                {##}
+                {#        </table>#}
+                <div class="carousel-item" style="background-image: url('static/assets/img/slide/天气图片04.jpg');">
+                    <div class="carousel-container">
+                        <div class="carousel-content container">
+                            <h2 class="animated fadeInDown">南昌天气</h2>
+                            <p class="animated fadeInUp">{{ datalist[0][0] }}</p>
+                            <p class="ttpp">{{ datalist[0][9] }}&nbsp&nbsp&nbsp<b
+                                    class="ttpp1"><br>{{ datalist[0][10] }}<br>{{ datalist[0][11] }}</b></p>
+                            <p>{{ datalist[0][1] }}&nbsp&nbsp&nbsp{{ datalist[0][2] }}&nbsp&nbsp&nbsp{{ datalist[0][3] }}</p>
+                            <table class="ttpp2">
+                                <tr>
+                                    <td>{{ datalist[0][5] }}&nbsp&nbsp&nbsp&nbsp{{ datalist[0][6] }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="main3" style="width: 700px;height:400px;">
+                            <p id="p1">更多信息</p>
+                            <table id="table01">
+
+                                <tr>
+                                    <td>时间</td>
+                                    {% for data in datalist3 %}
+                                        <td>{{ data[1] }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td>天气</td>
+                                    {% for data in datalist3 %}
+                                        <td>{{ data[0] }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td>风向</td>
+                                    {% for data in datalist3 %}
+                                        <td>{{ data[2] }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td>风级</td>
+                                    {% for data in datalist3 %}
+                                        <td>{{ data[3] }}</td>
+                                    {% endfor %}
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon icofont-rounded-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#heroCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon icofont-rounded-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+
+        </div>
+    </div>
+</section><!-- End Hero -->
+<main id="main">
+
+
+    <div class="tlinks">Collect from <a href="http://www.cssmoban.com/" title="网站模板">网站模板</a></div>
+
+    <!-- ======= Counts Section ======= -->
+    <section class="counts section-bg">
+        <div class="container">
+
+            {#            <div class="row">#}
+            {##}
+            {#                <div class="col-lg-3 col-md-6 text-center" data-aos="fade-up">#}
+            {#                    <div class="count-box">#}
+            {#                        <i class="icofont-simple-smile" style="color: #20b38e;"></i>#}
+            {#                        <span data-toggle="counter-up">232</span>#}
+            {#                        <p>Happy Clients</p>#}
+            {#                    </div>#}
+            {#                </div>#}
+            {##}
+            {#                <div class="col-lg-3 col-md-6 text-center" data-aos="fade-up" data-aos-delay="200">#}
+            {#                    <div class="count-box">#}
+            {#                        <i class="icofont-document-folder" style="color: #c042ff;"></i>#}
+            {#                        <span data-toggle="counter-up">521</span>#}
+            {#                        <p>Projects</p>#}
+            {#                    </div>#}
+            {#                </div>#}
+            {##}
+            {#                <div class="col-lg-3 col-md-6 text-center" data-aos="fade-up" data-aos-delay="400">#}
+            {#                    <div class="count-box">#}
+            {#                        <i class="icofont-live-support" style="color: #46d1ff;"></i>#}
+            {#                        <span data-toggle="counter-up">1,463</span>#}
+            {#                        <p>Hours Of Support</p>#}
+            {#                    </div>#}
+            {#                </div>#}
+            {##}
+            {#                <div class="col-lg-3 col-md-6 text-center" data-aos="fade-up" data-aos-delay="600">#}
+            {#                    <div class="count-box">#}
+            {#                        <i class="icofont-users-alt-5" style="color: #ffb459;"></i>#}
+            {#                        <span data-toggle="counter-up">15</span>#}
+            {#                        <p>Hard Workers</p>#}
+            {#                    </div>#}
+            {#                </div>#}
+
+            {#            </div>#}
+            <table class="table table-striped">
+                <tr>
+                    <td>日期</td>
+                    <td>最高温度</td>
+                    <td>最低气温</td>
+                    <td>天气</td>
+                    <td>风向</td>
+
+                </tr>
+                {% for data in datalist6 %}
+                    <tr>
+                        <td>{{ data[0] }}</td>
+                        <td>{{ data[1] }}</td>
+                        <td>{{ data[2] }}</td>
+                        <td>{{ data[3] }}</td>
+                        <td>{{ data[4] }}</td>
+
+                    </tr>
+                {% endfor %}
+
+
+            </table>
+        </div>
+    </section><!-- End Counts Section -->
+
+</main>
+
+
+<!-- ======= Footer ======= -->
+<footer id="footer">
+
+
+    <div class="container">
+        <div class="copyright">
+            <strong><span></span></strong>
+        </div>
+        <div class="credits">
+            <a href="http://www.cssmoban.com/" target="_blank" title="模板之家"></a>  <a
+                href="http://www.cssmoban.com/" title="网页模板" target="_blank"></a>
+        </div>
+    </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="static/assets/vendor/jquery/jquery.min.js"></script>
+<script src="static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="static/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+<script src="static/assets/vendor/php-email-form/validate.js"></script>
+<script src="static/assets/vendor/jquery-sticky/jquery.sticky.js"></script>
+<script src="static/assets/vendor/venobox/venobox.min.js"></script>
+<script src="static/assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+<script src="static/assets/vendor/counterup/counterup.min.js"></script>
+<script src="static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="static/assets/vendor/aos/aos.js"></script>
+
+<!-- Template Main JS File -->
+<script src="static/assets/js/main.js"></script>
+
+<style>
+    .copyrights {
+        text-indent: -9999px;
+        height: 0;
+        line-height: 0;
+        font-size: 0;
+        overflow: hidden;
+    }
+</style>
+<div class="copyrights" id="links20210126">
+    Collect from <a href="http://www.cssmoban.com/" title="网站模板"></a>
+    <a href="https://www.chazidian.com/" title="查字典"></a>
+</div>
+</body>
+
+</html>

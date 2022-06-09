@@ -1,6 +1,5 @@
-from db.save_data import insert, read_month, read_day
-from echarts.gen_chart import create_chart, calendar_day, pie_wind
-from echarts.data_utils import spilt_flag
+from db.mysql.save_data import insert, read_day
+from echarts.gen_chart import pie_wind
 
 if __name__ == "__main__":
     insert(2021, 1, 2022, 4)
