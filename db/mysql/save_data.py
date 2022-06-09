@@ -1,6 +1,6 @@
 import pymysql
-from db.insert_data import insertData
-from db.read_data import read_month_data_2021, read_day_data_2021, read_day_wind_2021
+from db.mysql.insert_data import insertData
+from db.mysql.read_data import read_month_data_2021, read_day_data_2021, read_day_wind_2021
 from spider.range import rangeTime
 
 # 配置 mysql

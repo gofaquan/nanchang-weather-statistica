@@ -3,8 +3,10 @@ import bs4
 import re
 import pandas as pd
 
-def flatten(list):
-    return [item for sublist in list for item in sublist]
+
+def flatten(List):
+    return [item for sublist in List for item in sublist]
+
 
 def main():
     baseurl = "https://www.tianqi.com/nanchang/"
@@ -21,7 +23,7 @@ def main():
     wheater = DataMap[0] + DataMap[3] + DataMap[6] + DataMap[9]
     # 风向
     wind = DataMap[1] + DataMap[4] + DataMap[7] + DataMap[10]
-    
+
     flatten(hours)
     flatten(wind_level)
     # flatten(temperature)
@@ -38,8 +40,7 @@ def main():
         }
     )
     print(spiderAns)
-    spiderAns.to_csv("charts/24h_sun_wind.csv",encoding="utf_8_sig")
-
+    spiderAns.to_csv("charts/24h_sun_wind.csv", encoding="utf_8_sig")
 
 
 findDate = re.compile(r'<dd class="week">(.*?)</dd>')  # 生成正则表达式，表示规则（字符串的模式）
@@ -57,6 +58,7 @@ findArea = re.compile(r'<a href="(.*)" title="(.*)">')
 findTips = re.compile(
     r'<li><i><img src="(.*?)"/></i><b>(.*?)</b><a href="(.*?)"><p>(.*?)</p></a></li>'
 )
+
 
 # 爬取网页
 def getData(baseurl):
@@ -94,7 +96,20 @@ def getData(baseurl):
 
 def askURL(url):
     head = {
-        "user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36"
+        'Accept': 'application/json, text/javascript, */*; q=0.01',
+        # 'Accept-Language': ' zh-CN,zh;q=0.9',
+        'Connection': 'keep-alive',
+        'Cookie': 'Hm_lvt_a3f2879f6b3620a363bec646b7a8bcdd=1653402829,1653442456; Hm_lpvt_a3f2879f6b3620a363bec646b7a8bcdd=1653445895',
+        'Host': 'tianqi.2345.com',
+        'Referer': 'https://tianqi.2345.com/wea_history/58606.htm',
+        # 'sec-ch-ua': ' " Not A;Brand";v="99", "Chromium";v="101", "Google Chrome";v="101"',
+        'sec-ch-ua-mobile': '?0',
+        'sec-ch-ua-platform': "Windows",
+        'Sec-Fetch-Dest': 'empty',
+        # 'Sec-Fetch-Mode': ' cors',
+        # 'Sec-Fetch-Site': ' same-origin',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.0.0 Safari/537.36',
+        'X-Requested-With': 'XMLHttpRequest',
     }
     request = urllib.request.Request(url, headers=head)  # 向网页提供请求
     html = ""
