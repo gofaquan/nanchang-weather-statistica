@@ -6,7 +6,7 @@ certifi==2022.5.18.1
 charset-normalizer==2.0.12
 defusedxml==0.7.1
 idna==3.3
-lit==13.0.1.dev0
+lit==13.0.1
 multivolumefile==0.2.3
 patch==1.16
 psutil==5.9.1
