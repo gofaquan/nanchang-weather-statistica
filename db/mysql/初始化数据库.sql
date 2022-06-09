@@ -24,3 +24,4 @@ create table 每日数据
     空气质量指数 varchar(20) default '未知' null
 )
     comment '每天的天气指标';
+
